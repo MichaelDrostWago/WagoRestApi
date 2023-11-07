@@ -1,0 +1,228 @@
+[
+    {
+        "id": "041f358b307506a1",
+        "type": "tab",
+        "label": "PFC API",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "528d1d56d79c5014",
+        "type": "http request",
+        "z": "041f358b307506a1",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "7801256b725e3d4e",
+        "persist": false,
+        "proxy": "",
+        "authType": "basic",
+        "senderr": false,
+        "x": 350,
+        "y": 180,
+        "wires": [
+            [
+                "9e64d0abbf73b890",
+                "880142241affdfe8"
+            ]
+        ]
+    },
+    {
+        "id": "9e64d0abbf73b890",
+        "type": "debug",
+        "z": "041f358b307506a1",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "880142241affdfe8",
+        "type": "json",
+        "z": "041f358b307506a1",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 530,
+        "y": 240,
+        "wires": [
+            [
+                "d1b3f2c14ecd202e"
+            ]
+        ]
+    },
+    {
+        "id": "8cacfc5ea5aed789",
+        "type": "debug",
+        "z": "041f358b307506a1",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "45217ef65a2be9f6",
+        "type": "inject",
+        "z": "041f358b307506a1",
+        "name": "Write Parameter",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "headers.content-type",
+                "v": "application/vnd.api+json",
+                "vt": "str"
+            },
+            {
+                "p": "url",
+                "v": "https://192.168.2.143/wda/parameters",
+                "vt": "str"
+            },
+            {
+                "p": "method",
+                "v": "patch",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"data\":[{\"id\":\"0-0-systemtime-now\",\"type\":\"parameters\",\"attributes\":{\"value\":1686037778}},{\"id\":\"0-0-docker-enabled\",\"type\":\"parameters\",\"attributes\":{\"value\":true}}]}",
+        "payloadType": "json",
+        "x": 140,
+        "y": 380,
+        "wires": [
+            [
+                "b611775b67806a38"
+            ]
+        ]
+    },
+    {
+        "id": "b611775b67806a38",
+        "type": "http request",
+        "z": "041f358b307506a1",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://192.168.2.129/wda/parameters",
+        "tls": "7801256b725e3d4e",
+        "persist": false,
+        "proxy": "",
+        "authType": "basic",
+        "senderr": false,
+        "x": 350,
+        "y": 380,
+        "wires": [
+            [
+                "8cacfc5ea5aed789"
+            ]
+        ]
+    },
+    {
+        "id": "48f2f94b3f81aa93",
+        "type": "comment",
+        "z": "041f358b307506a1",
+        "name": "Enable or Disable docker on PFC Set Actual Time",
+        "info": "",
+        "x": 220,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "e105579a262bfd64",
+        "type": "inject",
+        "z": "041f358b307506a1",
+        "name": "Read Parameters",
+        "props": [
+            {
+                "p": "headers.content-type",
+                "v": "application/vnd.api+json",
+                "vt": "str"
+            },
+            {
+                "p": "url",
+                "v": "https://192.168.2.141/wda/parameters",
+                "vt": "str"
+            },
+            {
+                "p": "method",
+                "v": "get",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 140,
+        "y": 180,
+        "wires": [
+            [
+                "528d1d56d79c5014"
+            ]
+        ]
+    },
+    {
+        "id": "5ce688268b3f4d37",
+        "type": "comment",
+        "z": "041f358b307506a1",
+        "name": "Read Config and Convert to Json",
+        "info": "",
+        "x": 170,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "d1b3f2c14ecd202e",
+        "type": "debug",
+        "z": "041f358b307506a1",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "7801256b725e3d4e",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": false,
+        "alpnprotocol": ""
+    }
+]
