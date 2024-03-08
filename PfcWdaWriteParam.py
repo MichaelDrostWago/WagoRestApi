@@ -71,5 +71,5 @@ response        = requests.get(url, auth=(username, password), verify=False)
 response_json   = response.json()
 print("Docker state is: " + str(response_json["data"]["attributes"]["value"]))
 print(bcolors.OKGREEN + "Done!")
-
+print(bcolors.ENDC)
 
