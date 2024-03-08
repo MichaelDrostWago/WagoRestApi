@@ -68,3 +68,4 @@ for x in data:
 f.close()    
 
 print(bcolors.OKGREEN + "done!")
+print(bcolors.ENDC)
