@@ -2,8 +2,15 @@ import requests
 import time
 from requests.auth import HTTPBasicAuth
 
+# Script Parameter
+username = "admin"
+password = "wago"
+ipAddress = "192.168.2.105"
+
+
+
 # Ziel-URL
-url = "https://192.168.2.105/wda/parameters/0-0-systemtime-now"
+url = "https://"+ipAddress+"/wda/parameters/0-0-systemtime-now"
 
 
 current_timestamp = int(time.time())
@@ -24,9 +31,6 @@ headers = {
     "Content-Type": "application/vnd.api+json"
 }
 
-# Basic Auth-Zugangsdaten
-username = "admin"
-password = "wago"
 
 # PATCH-Request senden
 response = requests.patch(
